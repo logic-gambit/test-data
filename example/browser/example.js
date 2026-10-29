@@ -3434,7 +3434,7 @@ module.exports = (() => {
   function retrieveSnapshotsUsingGetQuote(symbols, username, password) {
     return Promise.resolve().then(() => {
       const options = {
-        url: `https://webapp-proxy.aws.barchart.com/v1/proxies/ondemand/getQuote.json?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&symbols=${encodeURIComponent(symbols.join())}&fields=${encodeURIComponent(ADDITIONAL_FIELDS.join())}`,
+        url: `https://webapp-proxy.aws.barchart.com/v1/proxies/ondemand/getQuote.json?username=${encodeURIComponent(username)}&password=PLACEHOLDER3PLACEHOLDER2PLACEHOLDER_REMOVE${encodeURIComponent(password)}&symbols=${encodeURIComponent(symbols.join())}&fields=${encodeURIComponent(ADDITIONAL_FIELDS.join())}`,
         method: 'GET'
       };
       return Promise.resolve(axios(options)).then(response => {
