@@ -1,3 +1,5 @@
+const path = require('path');
+
 const is = require('@barchart/common-js/lang/is');
 
 const ReplayFileReader = require('./common/ReplayFileReader'),
@@ -31,7 +33,15 @@ const ReplayFileReader = require('./common/ReplayFileReader'),
 				console.log(`Command [ ${type} ], operand [ ${filename} ]`);
 
 				try {
-					fileReader = ReplayFileReader.for(`./logs/${filename}`);
+					const logsBase = path.resolve('./logs');
+					const resolved = path.resolve(logsBase, filename);
+
+					if (!resolved.startsWith(logsBase + path.sep)) {
+						console.log(`Rejected path traversal attempt [ ${filename} ]`);
+						break;
+					}
+
+					fileReader = ReplayFileReader.for(resolved);
 				} catch (e) {
 					console.log(`Unable to load file [ ./logs/${filename} ]`, e);
 				}
